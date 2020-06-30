@@ -30,13 +30,16 @@ namespace WebApiSignalR
 
             //SignalR
             Global.SignalRMessage = CustomHub.Send;
+            Global.SignalRMessageAll = CustomHub.SendAll;
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
         }
 
         public class Global
         {
             public delegate void DelSignalRMessage(string name, string data, string origen = "server");
+            public delegate void DelSignalRMessageAll(string data, string origen = "server");
             public static DelSignalRMessage SignalRMessage;
+            public static DelSignalRMessageAll SignalRMessageAll;
         }
     }
 }

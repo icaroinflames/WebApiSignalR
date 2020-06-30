@@ -51,6 +51,22 @@ namespace WebApiSignalR.Helpers
             }
         }
 
+        public static void SendAll(string data, string origen = "server")
+        {
+            try
+            {
+                var conexion = GlobalHost.ConnectionManager.GetHubContext<CustomHub>();
+                if (conexion != null)
+                {
+                    conexion.Clients.All.mostrarMensaje(origen, data);//llama al método "mostrarMensaje" de los clientes conectados
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+        }
+
         public ClaimsPrincipal GetClaim()
         {
             try

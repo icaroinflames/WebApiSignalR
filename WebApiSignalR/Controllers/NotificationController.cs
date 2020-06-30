@@ -15,8 +15,19 @@ namespace WebApiSignalR.Controllers
         [HttpPost]
         [Route("notificar")]
         public IHttpActionResult notifyClient(NotificationRequest notificationRequest)
+        {           
+            WebApiConfig.Global.SignalRMessage(notificationRequest.Username, notificationRequest.Message, User.Identity.Name);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("notificar_todos")]
+        public IHttpActionResult notifyAll(NotificationRequest notificationRequest)
         {
-            WebApiConfig.Global.SignalRMessage(notificationRequest.Username, notificationRequest.Message, notificationRequest.Origin);
+            if(notificationRequest != null && !string.IsNullOrEmpty(notificationRequest.Message))
+                WebApiConfig.Global.SignalRMessageAll(notificationRequest.Message, User.Identity.Name);
+
             return Ok();
         }
     }

@@ -9,6 +9,5 @@ namespace WebApiSignalR.Models
     {
         public string Username { get; set; }
         public string Message { get; set; }
-        public string Origin { get; set; }
     }
 }
